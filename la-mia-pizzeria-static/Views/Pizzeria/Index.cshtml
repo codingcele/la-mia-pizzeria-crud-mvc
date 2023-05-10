@@ -11,7 +11,7 @@
             <div class="">
                 <h1 class="ml-6">Menù</h1>
             </div>
-            <div class="col-2 d-flex justify-content-end text-center pl-4">
+            <div class="col-2 d-flex justify-content-between text-center pl-4">
                 <a href="@Url.Action("Create", "Pizzeria")" class="btn btn-primary">Aggiungi pizza</a>
             </div>
         </div>
@@ -41,6 +41,13 @@
                         </div>
                         <div class="col-1 text-center pl-4">
                             <a href="@Url.Action("Details", "Pizzeria", new { id = pizza.Id })" class="btn btn-primary">Dettagli</a>
+                            <form asp-controller="Pizzeria" asp-action="Delete" asp-route-id="@pizza.Id" method="post">
+                                @Html.AntiForgeryToken()
+                                <button type="submit" class="btn btn-danger btn-sm">
+                                    Elimina
+                                </button>
+                            </form>
+                            @*<a href="@Url.Action("Delete", "Pizzeria")" class="btn btn-danger">Elimina</a>*@
                         </div>
                     </div>
                 </div>
