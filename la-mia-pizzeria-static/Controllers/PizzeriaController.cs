@@ -7,9 +7,9 @@ namespace la_mia_pizzeria_static
 {
     public class PizzeriaController : Controller
     {
-        private readonly ILogger<PizzeriaController> _logger;
+        private ICustomLogger _logger;
 
-        public PizzeriaController(ILogger<PizzeriaController> logger)
+        public PizzeriaController(ICustomLogger logger)
         {
             _logger = logger;
         }
@@ -78,6 +78,7 @@ namespace la_mia_pizzeria_static
                 {
                     context.Pizza.Remove(pizzaToDelete);
                     context.SaveChanges();
+                    _logger.WriteLog("Pizza eliminata!");
 
                     return RedirectToAction("Index");
                 }

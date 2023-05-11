@@ -40,7 +40,7 @@
                             @pizza.Price &euro;
                         </div>
                         <div class="col-1 text-center pl-4">
-                            <a href="@Url.Action("Details", "Pizzeria", new { id = pizza.Id })" class="btn btn-primary">Dettagli</a>
+                            <a href="@Url.Action("Details", "Pizzeria", new { id = pizza.Id })" class="btn btn-primary mb-1">Dettagli</a>
                             <a href="@Url.Action("Update", "Pizzeria", new { id = pizza.Id })" class="btn" style="background-color:green; color:white;">Modifica</a>
                             <form asp-controller="Pizzeria" asp-action="Delete" asp-route-id="@pizza.Id" method="post">
                                 @Html.AntiForgeryToken()
