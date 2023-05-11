@@ -88,5 +88,52 @@ namespace la_mia_pizzeria_static
             }
         }
 
+        [HttpGet]
+        public IActionResult Update(int id) { 
+            using (PizzeriaContext context = new PizzeriaContext())
+            {
+                Pizza pizzaToEdit = context.Pizza.Where(pizza => pizza.Id == id).FirstOrDefault();
+                if (pizzaToEdit == null)
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    return View(pizzaToEdit);
+                }
+            }
+        }
+
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Update(int id, Pizza data)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View("Update", data);
+            }
+            using (PizzeriaContext context = new PizzeriaContext())
+            {
+                Pizza pizzaToEdit = context.Pizza.Where(pizza => pizza.Id == id).FirstOrDefault();
+
+                if (pizzaToEdit != null)
+                {
+                    pizzaToEdit.Image = data.Image;
+                    pizzaToEdit.Name = data.Name;
+                    pizzaToEdit.Ingredients = data.Ingredients;
+                    pizzaToEdit.Price = data.Price;
+
+                    context.SaveChanges();
+
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    return NotFound();
+                }
+            }
+        }
+
     }
 }

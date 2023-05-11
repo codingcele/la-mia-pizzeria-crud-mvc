@@ -1,0 +1,41 @@
+﻿@{
+    ViewData["Title"] = "Modifica pizza";
+    Layout = "_Layout";
+}
+
+@model Pizza
+
+<form asp-controller="Pizzeria" asp-action="Update" asp-route-itemid="@Model.Id" method="post">
+    @Html.AntiForgeryToken()
+    <div class="mb-3">
+        <strong>
+            Nome:
+        </strong>
+        <input asp-for="Name" class="d-block w-100">
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <strong>
+            Immagine:
+        </strong>
+        <input asp-for="Image" class="d-block w-100">
+        <span asp-validation-for="Image" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <strong>
+            Ingredienti:
+        </strong>
+        <input asp-for="Ingredients" class="d-block w-100">
+        <span asp-validation-for="Ingredients" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <strong>
+            Prezzo:
+        </strong>
+        <input asp-for="Price" class="d-block w-100">
+        <span asp-validation-for="Price" class="text-danger"></span>
+    </div>
+    <div class="text-end">
+        <input type="submit" class="btn btn-small btn-success" value="Salva">
+    </div>
+</form>

@@ -9,7 +9,7 @@ namespace la_mia_pizzeria_static
             if (value != null)
             {
                 var ingredients = (string)value;
-                var words = ingredients.Split(' ');
+                var words = ingredients.Split(',');
                 return words.Length >= 3;
             }
             return false;

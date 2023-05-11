@@ -9,22 +9,22 @@
     <form asp-controller="Pizzeria" asp-action="Create" method="post">
         @Html.AntiForgeryToken()
         <div class="mb-3">
-            <strong>Name:</strong>
+            <strong>Nome:</strong>
             <input asp-for="Name" class="d-block w-100" />
             <span asp-validation-for="Name" class="text-danger"></span>
         </div>
         <div class="mb-3">
-            <strong>Image:</strong>
+            <strong>Immagie:</strong>
             <input asp-for="Image" class="d-block w-100" />
             <span asp-validation-for="Image" class="text-danger"></span>
         </div>
         <div class="mb-3">
-            <strong>Ingredients:</strong>
+            <strong>Ingredienti:</strong>
             <input asp-for="Ingredients" class="d-block w-100" />
             <span asp-validation-for="Ingredients" class="text-danger"></span>
         </div>
         <div class="mb-3">
-            <strong>Price:</strong>
+            <strong>Prezzo:</strong>
             <input asp-for="Price" class="d-block w-100" />
             <span asp-validation-for="Price" class="text-danger"></span>
         </div>
