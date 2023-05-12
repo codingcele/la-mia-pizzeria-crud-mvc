@@ -21,8 +21,8 @@ namespace la_mia_pizzeria_static
 
         [Required(ErrorMessage = "Il campo è obbligatorio")]
         [StringLength(200, ErrorMessage = "Gli ingredienti non possono avere più di 200 caratteri")]
-        [IngredientsMin3Words(ErrorMessage = "Gli ingredienti devono contenere almeno 3 parole.")]
-        public string Ingredients { get; set; }
+        [DescriptionMin3Words(ErrorMessage = "La descrizione deve contenere almeno 3 parole.")]
+        public string Description { get; set; }
 
         [Required(ErrorMessage = "Il campo è obbligatorio")]
         [Range(0.01, 25.00, ErrorMessage = "Il prezzo deve essere positivo e minore di 25.")]
@@ -31,16 +31,18 @@ namespace la_mia_pizzeria_static
         public int? PizzaCategoryId { get; set; }
         public PizzaCategory? PizzaCategory { get; set; }
 
+        public List<Ingredient>? Ingredients { get; set; }
+
         public Pizza()
         {
 
         }
 
-        public Pizza(string image, string name, string ingredients, decimal price)
+        public Pizza(string image, string name, string description, decimal price)
         {
             Image = image;
             Name = name;
-            Ingredients = ingredients;
+            Description = description;
             Price = price;
         }
 

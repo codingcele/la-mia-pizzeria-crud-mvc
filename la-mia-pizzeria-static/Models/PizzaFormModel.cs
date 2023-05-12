@@ -8,5 +8,7 @@ namespace la_mia_pizzeria_static
     {
         public Pizza Pizza { get; set; }
         public List<PizzaCategory>? Categories { get; set; }
+        public List<SelectListItem>? Ingredients { get; set; }
+        public List<string>? SelectedIngredients { get; set; }
     }
 }

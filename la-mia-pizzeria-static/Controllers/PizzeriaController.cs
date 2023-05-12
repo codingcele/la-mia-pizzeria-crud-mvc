@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
 
@@ -53,8 +54,22 @@ namespace la_mia_pizzeria_static
             {
                 using (PizzeriaContext context = new PizzeriaContext())
                 {
+                    List<Ingredient> ingredients = context.Ingredients.ToList();
+                    List<SelectListItem> listIngredients = new List<SelectListItem>();
+
                     List<PizzaCategory> categories = context.PizzaCategories.ToList();
+                 
+                    foreach (Ingredient ingredient in ingredients)
+                    {
+                        listIngredients.Add(new SelectListItem()
+                            {
+                                Text = ingredient.Name,
+                                Value = ingredient.Id.ToString(),
+                            });
+                    }
+
                     data.Categories = categories;
+                    data.Ingredients = listIngredients;
 
                     return View("Create", data);
                 }
@@ -64,11 +79,27 @@ namespace la_mia_pizzeria_static
                 Pizza pizzaToCreate = new Pizza();
                 pizzaToCreate.Image = data.Pizza.Image;
                 pizzaToCreate.Name = data.Pizza.Name;
-                pizzaToCreate.Ingredients = data.Pizza.Ingredients;
+                pizzaToCreate.Description = data.Pizza.Description;
                 pizzaToCreate.Price = data.Pizza.Price;
 
                 pizzaToCreate.PizzaCategoryId = data.Pizza.PizzaCategoryId;
-                
+
+
+
+                pizzaToCreate.Ingredients = new List<Ingredient>();
+
+
+
+                if (data!= null && data.SelectedIngredients != null)
+                {
+                    foreach (string selectedIngredientsId in data.SelectedIngredients)
+                    {
+                        int selectedIntIngredientId = int.Parse(selectedIngredientsId);
+                        Ingredient ingredient = context.Ingredients.Where(m => m.Id == selectedIntIngredientId).FirstOrDefault();
+                        pizzaToCreate.Ingredients.Add(ingredient);
+                    }
+                }
+
                 context.Pizza.Add(pizzaToCreate);
                 context.SaveChanges();
 
@@ -82,10 +113,25 @@ namespace la_mia_pizzeria_static
             using (PizzeriaContext context = new PizzeriaContext())
             {
                 List<PizzaCategory> categories = context.PizzaCategories.ToList();
+                List<Ingredient> ingredients = context.Ingredients.ToList();
 
                 PizzaFormModel model = new PizzaFormModel();
+                
+
+                List<SelectListItem> listIngredients = new List<SelectListItem>();
+
+                foreach (Ingredient ingredient in ingredients)
+                {
+                    listIngredients.Add(new SelectListItem()
+                    {
+                        Text = ingredient.Name, Value = ingredient.Id.ToString()
+                    });
+                }
+
                 model.Pizza = new Pizza();
+                model.Ingredients = listIngredients;
                 model.Categories = categories;
+                
 
                 return View("Create", model);
             }
@@ -161,7 +207,7 @@ namespace la_mia_pizzeria_static
                 {
                     pizzaToEdit.Image = data.Pizza.Image;
                     pizzaToEdit.Name = data.Pizza.Name;
-                    pizzaToEdit.Ingredients = data.Pizza.Ingredients;
+                    pizzaToEdit.Description = data.Pizza.Description;
                     pizzaToEdit.Price = data.Pizza.Price;
 
                     pizzaToEdit.PizzaCategoryId = data.Pizza.PizzaCategoryId;

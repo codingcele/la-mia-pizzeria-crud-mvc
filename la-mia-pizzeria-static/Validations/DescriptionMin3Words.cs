@@ -2,14 +2,14 @@
 
 namespace la_mia_pizzeria_static
 {
-    public class IngredientsMin3Words : ValidationAttribute
+    public class DescriptionMin3Words : ValidationAttribute
     {
         public override bool IsValid(object value)
         {
             if (value != null)
             {
-                var ingredients = (string)value;
-                var words = ingredients.Split(',');
+                var description = (string)value;
+                var words = description.Split(' ');
                 return words.Length >= 3;
             }
             return false;
@@ -17,7 +17,7 @@ namespace la_mia_pizzeria_static
 
         public override string FormatErrorMessage(string name)
         {
-            return "Inserisci almeno 3 ingredienti";
+            return "Inserisci almeno 5 parole";
         }
     }
 }
