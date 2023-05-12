@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using la_mia_pizzeria_static.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace la_mia_pizzeria_static
@@ -26,6 +27,9 @@ namespace la_mia_pizzeria_static
         [Required(ErrorMessage = "Il campo è obbligatorio")]
         [Range(0.01, 25.00, ErrorMessage = "Il prezzo deve essere positivo e minore di 25.")]
         public decimal? Price { get; set; }
+
+        public int? PizzaCategoryId { get; set; }
+        public PizzaCategory? PizzaCategory { get; set; }
 
         public Pizza()
         {

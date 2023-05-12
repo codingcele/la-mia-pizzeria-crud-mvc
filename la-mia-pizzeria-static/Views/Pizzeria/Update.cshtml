@@ -3,37 +3,54 @@
     Layout = "_Layout";
 }
 
-@model Pizza
+@model PizzaFormModel
 
-<form asp-controller="Pizzeria" asp-action="Update" asp-route-itemid="@Model.Id" method="post">
+<form asp-controller="Pizzeria" asp-action="Update" asp-route-itemid="@Model.Pizza.Id" method="post">
     @Html.AntiForgeryToken()
     <div class="mb-3">
         <strong>
             Nome:
         </strong>
-        <input asp-for="Name" class="d-block w-100">
-        <span asp-validation-for="Name" class="text-danger"></span>
+        <input asp-for="Pizza.Name" class="d-block w-100">
+        <span asp-validation-for="Pizza.Name" class="text-danger"></span>
     </div>
     <div class="mb-3">
         <strong>
             Immagine:
         </strong>
-        <input asp-for="Image" class="d-block w-100">
-        <span asp-validation-for="Image" class="text-danger"></span>
+        <input asp-for="Pizza.Image" class="d-block w-100">
+        <span asp-validation-for="Pizza.Image" class="text-danger"></span>
     </div>
     <div class="mb-3">
         <strong>
             Ingredienti:
         </strong>
-        <input asp-for="Ingredients" class="d-block w-100">
-        <span asp-validation-for="Ingredients" class="text-danger"></span>
+        <input asp-for="Pizza.Ingredients" class="d-block w-100">
+        <span asp-validation-for="Pizza.Ingredients" class="text-danger"></span>
     </div>
     <div class="mb-3">
         <strong>
             Prezzo:
         </strong>
-        <input asp-for="Price" class="d-block w-100">
-        <span asp-validation-for="Price" class="text-danger"></span>
+        <input asp-for="Pizza.Price" class="d-block w-100">
+        <span asp-validation-for="Pizza.Price" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <strong>Categoria:</strong>
+        <select asp-for="Pizza.PizzaCategoryId" rows="10" class="d-block w-100">
+            <option value=""></option>
+            @foreach (PizzaCategory category in Model.Categories)
+            {
+                @if (Model.Pizza.PizzaCategoryId == category.Id)
+                {
+                    <option value="@category.Id" selected>@category.Name</option>
+                }
+                else
+                {
+                    <option value="@category.Id">@category.Name</option>
+                }
+            }
+        </select>
     </div>
     <div class="text-end">
         <input type="submit" class="btn btn-small btn-success" value="Salva">
