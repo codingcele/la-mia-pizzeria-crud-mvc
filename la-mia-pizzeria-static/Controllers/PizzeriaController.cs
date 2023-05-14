@@ -33,8 +33,8 @@ namespace la_mia_pizzeria_static
         {
             using (PizzeriaContext context = new PizzeriaContext())
             {
-                Pizza pizzaById = context.Pizza.Where(m => m.Id == id).Include(pizza => pizza.PizzaCategory).FirstOrDefault();
-                
+                Pizza pizzaById = context.Pizza.Where(m => m.Id == id).Include(pizza => pizza.PizzaCategory).Include(pizza => pizza.Ingredients).FirstOrDefault();
+
                 if (pizzaById == null)
                 {
                     return NotFound($"La pizza con id {id} non è stata trovata.");

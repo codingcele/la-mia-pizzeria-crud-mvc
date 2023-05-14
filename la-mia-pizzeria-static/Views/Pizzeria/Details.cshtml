@@ -13,16 +13,28 @@
         <div class="col-2 text-center fw-bold">
             @Model.Name
         </div>
-        @*<div class="col-5 text-center">
-            Ingredienti: @Model.Ingredients
-        </div>*@
         <div class="col-5 text-center">
-            @Model.Description
+            Ingredienti: 
+            @foreach (Ingredient ingredient in Model.Ingredients)
+            {
+                List<Ingredient> ingrList = Model.Ingredients;
+                if (ingrList.IndexOf(ingredient) != ingrList.Count - 1)
+                {
+                    <span> @ingredient.Name,</span>
+                }
+                else
+                {
+                    <span> @ingredient.Name.</span>
+                }
+            }
         </div>
         <div class="col-1 text-center fw-bold">
             @Model.Price &euro;
         </div>
     </div>
+</div>
+<div class="row">
+    @Model.Description
 </div>
 <div class="row">
     <div class="col fs-4 fw-bold mt-4">
