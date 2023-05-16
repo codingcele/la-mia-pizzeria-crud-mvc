@@ -11,9 +11,12 @@
             <div class="">
                 <h1 class="ml-6">Menù</h1>
             </div>
-            <div class="col-2 d-flex justify-content-end text-center pl-4">
-                <a href="@Url.Action("Create", "Pizzeria")" class="btn btn-primary">Aggiungi pizza</a>
+            @if (User.IsInRole("ADMIN"))
+            {
+                <div class="col-2 d-flex justify-content-end text-center pl-4">
+                    <a href="@Url.Action("Create", "Pizzeria")" class="btn btn-primary">Aggiungi pizza</a>
             </div>
+            }
         </div>
     </div>
     <div>
@@ -40,14 +43,21 @@
                             @pizza.Price &euro;
                         </div>
                         <div class="col-3 text-center pl-4">
+                            @if (User.IsInRole("ADMIN"))
+                            {
+                                <a href="@Url.Action("Update", "Pizzeria", new { id = pizza.Id })" class="btn" style="background-color:green; color:white;">Modifica</a>
+
+                            }
                             <a href="@Url.Action("Details", "Pizzeria", new { id = pizza.Id })" class="btn btn-primary">Dettagli</a>
-                            <a href="@Url.Action("Update", "Pizzeria", new { id = pizza.Id })" class="btn" style="background-color:green; color:white;">Modifica</a>
-                            <form asp-controller="Pizzeria" asp-action="Delete" asp-route-id="@pizza.Id" method="post">
-                                @Html.AntiForgeryToken()
-                                <button type="submit" class="btn btn-danger btn-sm">
-                                    Elimina
-                                </button>
-                            </form>
+                            @if (User.IsInRole("ADMIN"))
+                            {
+                                <form asp-controller="Pizzeria" asp-action="Delete" asp-route-id="@pizza.Id" method="post">
+                                    @Html.AntiForgeryToken()
+                                    <button type="submit" class="btn btn-danger btn-sm">
+                                        Elimina
+                                    </button>
+                                </form>
+                            }
                         </div>
                     </div>
                 </div>

@@ -1,10 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
 
 namespace la_mia_pizzeria_static
 {
+    [Authorize]
     public class PizzeriaController : Controller
     {
         private ICustomLogger _logger;
@@ -14,6 +16,7 @@ namespace la_mia_pizzeria_static
             _logger = logger;
         }
 
+        [Authorize(Roles = "ADMIN,USER")]
         public IActionResult Index()
         {
             using (PizzeriaContext db = new PizzeriaContext())
@@ -24,11 +27,13 @@ namespace la_mia_pizzeria_static
             }
         }
 
+        [Authorize(Roles = "ADMIN,USER")]
         public IActionResult Privacy()
         {
             return View();
         }
 
+        [Authorize(Roles = "ADMIN,USER")]
         public IActionResult Details(int id)
         {
             using (PizzeriaContext context = new PizzeriaContext())
@@ -46,6 +51,7 @@ namespace la_mia_pizzeria_static
             }
         }
 
+        [Authorize(Roles = "ADMIN")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Create(PizzaFormModel data)
@@ -107,6 +113,7 @@ namespace la_mia_pizzeria_static
             }
         }
 
+        [Authorize(Roles = "ADMIN")]
         [HttpGet]
         public IActionResult Create()
         {
@@ -135,8 +142,8 @@ namespace la_mia_pizzeria_static
                 return View("Create", model);
             }
         }
-          
 
+        [Authorize(Roles = "ADMIN")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Delete(int id)
@@ -160,6 +167,7 @@ namespace la_mia_pizzeria_static
             }
         }
 
+        [Authorize(Roles = "ADMIN")]
         [HttpGet]
         public IActionResult Update(int id) { 
             using (PizzeriaContext context = new PizzeriaContext())
@@ -199,7 +207,7 @@ namespace la_mia_pizzeria_static
             }
         }
 
-
+        [Authorize(Roles = "ADMIN")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Update(int id, PizzaFormModel data)

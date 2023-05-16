@@ -15,28 +15,29 @@
 </head>
 
 <body style="background-image: url(https://www.dapino.it/wp-content/uploads/2021/05/Menu-pizzeria-sfondo.jpg); background-size: cover; background-attachment: fixed;">
-    <header class="bg-white" style="height: 20vh">
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light box-shadow mb- px-3 py-5" style="font-size:40px;">
-            <div class="container-fluid d-flex justify-content-between">
-                <div>
-                    <a class="navbar-brand" asp-area="" asp-controller="Pizzeria" asp-action="Index" style="font-size: 30px;">Pizzeria da <span style="color:red;">Cele</span></a>
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                            aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                </div>
-                <div>
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Pizzeria" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Pizzeria" asp-action="Privacy">Privacy</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
+    <div id="navbarNav" class="d-flex flex-row justify-content-end bg-white" style="height: 4vh">
+        <ul class="navbar-nav d-flex flex-row" style="margin-right: 1vw;">
+            <li class="nav-item" style="margin-right: 1vw;">
+                <a class="nav-link" aria-current="page" href="@Url.Action("Index", "User")">Admin</a>
+            </li>
+            <!-- code omitted -->
+            <partial name="_LoginPartial" />
+        </ul>
+    </div>
+    <header class="d-flex justify-content-between align-items-center bg-white" style="height: 16vh">
+        <div style="padding: 1vw; font-size: 42px;">
+            <a class="navbar-brand" asp-area="" asp-controller="Pizzeria" asp-action="Index" style="font-size: inherit; color: black;">Pizzeria da <span style="color:red;">Cele</span></a>
+        </div>
+        <div style="font-size: 28px;">
+            <ul class="d-flex flex-row navbar-nav flex-grow-1">
+                <li class="nav-item" style="padding: 1vw;">
+                    <a class="nav-link text-dark" asp-area="" asp-controller="Pizzeria" asp-action="Index">Home</a>
+                </li>
+                <li class="nav-item" style="padding: 1vw;">
+                    <a class="nav-link text-dark" asp-area="" asp-controller="Pizzeria" asp-action="Privacy">Privacy</a>
+                </li>
+            </ul>
+        </div>
     </header>
 
     <main style="min-height: 58vh; margin-left: 5vw; margin-top: 7vh; margin-bottom: 7vh; max-width: 70vw; padding: 8vh 3vw; background-image: url(https://www.dapino.it/wp-content/uploads/2020/05/sfondo-pers-menu.jpg?id=5403) !important;">
