@@ -1,9 +1,11 @@
 ﻿using System.Diagnostics;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace la_mia_pizzeria_static
 {
-    public class PizzeriaContext : DbContext
+    public class PizzeriaContext : IdentityDbContext<IdentityUser>
     {
         public DbSet<PizzaCategory> PizzaCategories { get; set; }
         public DbSet<Ingredient> Ingredients { get; set; }
